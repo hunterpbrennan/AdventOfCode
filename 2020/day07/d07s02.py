@@ -19,24 +19,15 @@ for rule in baggageRules:
         contents[i].reverse()
     ruleGraph[node[0].strip()] = contents
 
-bagsToCheck = [["shiny gold","1"]]
+def dfs(graph,node,multiplier,count):
+    for n in graph[node[0]]:
+        if n[0] != 'other':
+            multiplier = multiplier*int(n[1])
+            count = count + multiplier
+            count = dfs(graph,n,multiplier,count)
+            multiplier = multiplier//int(n[1])
+    return count
 
+totalBags = dfs(ruleGraph,["shiny gold",1],1,0)
 
-def dfs(graph,node,visited,multiplier,count):
-    print(node,graph[node])
-    if node not in visited:
-        visited.append(node)
-        for n in graph[node]:
-            if n[0] != 'other':
-                print(n[0])
-                multiplier = multiplier*int(n[1])
-                count.append(multiplier)
-                print(count)
-                dfs(graph,n[0],visited,multiplier,count)
-                multiplier = multiplier//int(n[1])
-    print()
-    return visited,count
-
-x,y = dfs(ruleGraph,"shiny gold",[],1,[])
-
-print(sum(y))
+print(totalBags)
