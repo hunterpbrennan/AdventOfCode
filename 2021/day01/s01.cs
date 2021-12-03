@@ -5,24 +5,20 @@ namespace AdventOfCode.Y2021.Day01
 {
     class S01
     {
-        public void Solve(List<int> puzzleInput)
+        public void Solve(List<string> puzzleInput)
         {
             var result = 0;
-            int previous = 0;
 
-            foreach( var line in puzzleInput) 
+            for(int index = 1; index < puzzleInput.Count(); index++) 
             {
-                if(previous != 0 && line > previous) 
+                if(int.Parse(puzzleInput[index-1]) < int.Parse(puzzleInput[index])) 
                 {
                     result += 1;
                 }
-                previous = line;
             }
-
-            
             Console.WriteLine($"There are {result} measurements larger than the previous");
         }
 
-        public static string InputFile = "2021/day01/d01input.txt";
+        public static string InputFile = "2021/day01/input.txt";
     }
 }
