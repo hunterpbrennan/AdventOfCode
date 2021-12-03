@@ -46,14 +46,14 @@ namespace AdventOfCode
 
         public static void SolveDay02()
         {
-            Console.WriteLine("Solving day 01");
+            Console.WriteLine("Solving day 02");
             
             var day01Puzzle = new Day02.S01();
             var day02Puzzle = new Day02.S02();
 
-            var puzzle01Input = GetInput(Day02.S01.InputFile);
-            day01Puzzle.Solve(puzzle01Input);
-            //day02Puzzle.Solve(puzzle01Input);
+            var puzzle01Input = GetInput(Day02.S02.InputFile);
+            //day01Puzzle.Solve(puzzle01Input);
+            day02Puzzle.Solve(puzzle01Input);
 
             Console.WriteLine("Day solved");
         }
