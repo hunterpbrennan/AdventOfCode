@@ -10,7 +10,8 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             // SolveDay01();
-            SolveDay02();
+            // SolveDay02();
+            SolveDay03();
         }
 
         public static List<string> GetInput(string inputFile)
@@ -51,9 +52,24 @@ namespace AdventOfCode
             var day01Puzzle = new Day02.S01();
             var day02Puzzle = new Day02.S02();
 
-            var puzzle01Input = GetInput(Day02.S02.InputFile);
-            //day01Puzzle.Solve(puzzle01Input);
+            var puzzle01Input = GetInput(Day02.S01.InputFile);
+            day01Puzzle.Solve(puzzle01Input);
             day02Puzzle.Solve(puzzle01Input);
+
+            Console.WriteLine("Day solved");
+        }
+
+        public static void SolveDay03()
+        {
+            Console.WriteLine("Solving day 03");
+            
+            var star1Puzzle = new Day02.S01();
+            var star2Puzzle = new Day02.S02();
+
+            var puzzle1Input = GetInput(star1Puzzle.InputFile);
+            var puzzle2Input = GetInput(star2Puzzle.InputFile);
+            star1Puzzle.Solve(puzzle1Input);
+            star2Puzzle.Solve(puzzle2Input);
 
             Console.WriteLine("Day solved");
         }
