@@ -69,8 +69,8 @@ namespace AdventOfCode
 
             var puzzle1Input = GetInput(star1Puzzle.InputFile);
             var puzzle2Input = GetInput(star2Puzzle.InputFile);
-            star1Puzzle.Solve(puzzle1Input);
-            //star2Puzzle.Solve(puzzle2Input);
+            //star1Puzzle.Solve(puzzle1Input);
+            star2Puzzle.Solve(puzzle2Input);
 
             Console.WriteLine("Day solved");
         }
