@@ -8,97 +8,77 @@ namespace AdventOfCode.Y2021.Day03
         public void Solve(List<string> puzzleInput)
         {
             int result = 0;
-            List<int> binaries = new List<int>(new int[puzzleInput[0].Length]);
-
-            foreach(string line in puzzleInput)
-            {
-                for(int index = 0; index < line.Length; index++)
-                {
-                    if(line[index] == '1')
-                    {
-                        binaries[index]++;
-                    }
-                    else
-                    {
-                        binaries[index]--;
-                    }
-                }
-            }
-            for(int index = 0; index<binaries.Count; index++)
-            {
-                //Console.WriteLine(binaries[index]);
-                if (binaries[index] > 0)
-                {
-                    GammaRate += "1";
-                    EpsilonRate += "0";
-                }
-                else
-                {
-                    GammaRate += "0";
-                    EpsilonRate += "1";
-                }
-            }
-
-            var oxygenList = puzzleInput;
+            var binary = 0;
+            var oxygenList = new List<string>(puzzleInput);
             var oxygenTempList = new List<string>();
-            var co2List = puzzleInput;
+            var co2List = new List<string>(puzzleInput);
             var co2TempList = new List<string>();
             var co2oxyIndex = 0;
 
             while(oxygenList.Count > 1)
             {
+                binary = 0;
                 foreach(string line in oxygenList)
                 {
-                    if(GammaRate[co2oxyIndex] == line[co2oxyIndex])
+                    if(line[co2oxyIndex] == '1')
+                    {
+                        binary++;
+                    }
+                    else
+                    {
+                        binary--;
+                    }
+                }
+                foreach(string line in oxygenList)
+                {
+                    if((binary >= 0 && line[co2oxyIndex] == '1') || ((binary < 0 && line[co2oxyIndex] == '0')))
                     {
                         oxygenTempList.Add(line);
                     }
                 }
-                co2oxyIndex++;
                 oxygenList = new List<string>(oxygenTempList);
                 oxygenTempList.Clear();
+                co2oxyIndex++;
             }
             OxygenGeneratorRating = oxygenList[0];
-            Console.WriteLine(GammaRate);
-            foreach(var oxygen in oxygenList)
-            {
-                Console.WriteLine(oxygen);
-            }
-
 
             co2oxyIndex = 0;
             while(co2List.Count > 1)
             {
+                binary = 0;
                 foreach(string line in co2List)
                 {
-                    if(EpsilonRate[co2oxyIndex] == line[co2oxyIndex])
+                    if(line[co2oxyIndex] == '1')
+                    {
+                        binary++;
+                    }
+                    else
+                    {
+                        binary--;
+                    }
+                }
+                foreach(string line in co2List)
+                {
+                    if((binary >= 0 && line[co2oxyIndex] == '0') || ((binary < 0 && line[co2oxyIndex] == '1')))
                     {
                         co2TempList.Add(line);
                     }
                 }
-                co2oxyIndex++;
                 co2List = new List<string>(co2TempList);
                 co2TempList.Clear();
+                co2oxyIndex++;
             }
             CO2ScrubberRating = co2List[0];
-            foreach(var co2 in co2List)
-            {
-                Console.WriteLine(co2);
-            }
 
             int oxygenDecimal =  Convert.ToInt32(OxygenGeneratorRating,2);
             int co2Decimal =  Convert.ToInt32(CO2ScrubberRating,2);
             result = oxygenDecimal * co2Decimal;
 
-            Console.WriteLine($"{result} is the result and {oxygenDecimal} is the GammaRate and {co2Decimal} is the EpsilonRate");
+            Console.WriteLine($"{result} is the result and {oxygenDecimal} is the OxygenRating and {co2Decimal} is the CO2Rating");
         }
 
-        public string InputFile = "2021/day03/example.txt";
-        public string GammaRate = "";
-        public string EpsilonRate = "";
+        public string InputFile = "2021/day03/input.txt";
         public string OxygenGeneratorRating = "";
         public string CO2ScrubberRating = "";
-
-
     }
 }
