@@ -81,14 +81,16 @@ namespace AdventOfCode
         {
             Console.WriteLine("Solving day 04");
             
-            var star1Puzzle = new Day04.S01();
-            //var star2Puzzle = new Day04.S02();
+            //var star1Puzzle = new Day04.S01();
+            var star2Puzzle = new Day04.S02();
 
-            star1Puzzle.ReadInput();
+            //star1Puzzle.ReadInput();
+            star2Puzzle.ReadInput();
 
             //var puzzle1Input = GetInput(star1Puzzle.InputFile);
             //var puzzle2Input = GetInput(star2Puzzle.InputFile);
-            star1Puzzle.Solve();
+            //star1Puzzle.Solve();
+            star2Puzzle.Solve();
             //star2Puzzle.Solve(puzzle2Input);
 
             Console.WriteLine("Day solved");

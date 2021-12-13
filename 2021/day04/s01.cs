@@ -28,13 +28,13 @@ namespace AdventOfCode.Y2021.Day04
                     spot = FindNumber(board, bingoNumber);
                     if(spot.Item1 <6)
                     {
-                        Console.WriteLine(spot.Item1 + " " +spot.Item2);
+                        //Console.WriteLine(spot.Item1 + " " +spot.Item2);
 
                         if (CheckForBingo(board, spot.Item1, spot.Item2))
                         {
                             result = CountScore(board);
-                            PrintBoards();
-                            PrintBoard(board);
+                            //PrintBoards();
+                            //PrintBoard(board);
                             Console.WriteLine(result +" * "+ bingoNumber);
                             return(result * Int32.Parse(bingoNumber));
                         }    
