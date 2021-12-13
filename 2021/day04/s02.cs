@@ -35,14 +35,14 @@ namespace AdventOfCode.Y2021.Day04
                         {
                             if(BingoBoards.Count()>1)
                             {
-                                PrintBoard(board);
+                                //PrintBoard(board);
                                 BingoBoards.RemoveAt(b);
                             }
                             else
                             {
                                 result = CountScore(board);
-                                PrintBoards();
-                                PrintBoard(board);
+                                //PrintBoards();
+                                //PrintBoard(board);
                                 Console.WriteLine(result +" * "+ bingoNumber);
                                 return(result * Int32.Parse(bingoNumber));
                             }
