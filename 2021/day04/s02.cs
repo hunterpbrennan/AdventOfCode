@@ -22,7 +22,8 @@ namespace AdventOfCode.Y2021.Day04
             {
                 (int, int) spot = (0, 0);
                 var board = new List<List<(string, int)>>();
-                for (var b = 0; b < BingoBoards.Count(); b++)
+                var b = 0;
+                while (b < BingoBoards.Count())
                 {
                     board = BingoBoards[b];
                     spot = FindNumber(board, bingoNumber);
@@ -32,12 +33,26 @@ namespace AdventOfCode.Y2021.Day04
 
                         if (CheckForBingo(board, spot.Item1, spot.Item2))
                         {
-                            result = CountScore(board);
-                            //PrintBoards();
-                            //PrintBoard(board);
-                            Console.WriteLine(result +" * "+ bingoNumber);
-                            return(result * Int32.Parse(bingoNumber));
-                        }    
+                            if(BingoBoards.Count()>1)
+                            {
+                                PrintBoard(board);
+                                BingoBoards.RemoveAt(b);
+                            }
+                            else
+                            {
+                                result = CountScore(board);
+                                PrintBoards();
+                                PrintBoard(board);
+                                Console.WriteLine(result +" * "+ bingoNumber);
+                                return(result * Int32.Parse(bingoNumber));
+                            }
+                        }else
+                        {
+                            b++;
+                        }   
+                    } else
+                    {
+                        b++;
                     }
                 }
             }
