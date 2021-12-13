@@ -9,7 +9,7 @@ namespace AdventOfCode.Y2021.Day01
         {
             int result = 0;
 
-            for(int index = 3; index < puzzleInput.Count(); index++) 
+            for(int index = 3; index < puzzleInput.Count; index++) 
             {
                 if(int.Parse(puzzleInput[index-3]) < int.Parse(puzzleInput[index])) 
                 {
