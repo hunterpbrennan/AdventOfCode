@@ -5,6 +5,7 @@ using Day01 = AdventOfCode.Y2021.Day01;
 using Day02 = AdventOfCode.Y2021.Day02;
 using Day03 = AdventOfCode.Y2021.Day03;
 using Day04 = AdventOfCode.Y2021.Day04;
+using Day05 = AdventOfCode.Y2021.Day05;
 
 namespace AdventOfCode
 {
@@ -15,7 +16,8 @@ namespace AdventOfCode
             // SolveDay01();
             // SolveDay02();
             // SolveDay03();
-            SolveDay04();
+            // SolveDay04();
+            SolveDay05();
         }
 
         public static List<string> GetInput(string inputFile)
@@ -92,6 +94,21 @@ namespace AdventOfCode
             //star1Puzzle.Solve();
             star2Puzzle.Solve();
             //star2Puzzle.Solve(puzzle2Input);
+
+            Console.WriteLine("Day solved");
+        }
+
+        public static void SolveDay05()
+        {
+            Console.WriteLine("Solving day 05");
+            
+            var star1Puzzle = new Day05.S01();
+            var star2Puzzle = new Day05.S02();
+
+            var puzzle1Input = GetInput(star1Puzzle.InputFile);
+            var puzzle2Input = GetInput(star2Puzzle.InputFile);
+            star1Puzzle.Solve(puzzle1Input);
+            star2Puzzle.Solve(puzzle2Input);
 
             Console.WriteLine("Day solved");
         }
