@@ -102,7 +102,7 @@ namespace AdventOfCode
             var star1Puzzle = new Day05.S01();
             //var star2Puzzle = new Day05.S02();
 
-            star1Puzzle.ReadInput();
+            //star1Puzzle.ReadInput();
             //star2Puzzle.ReadInput();
 
             star1Puzzle.Solve();

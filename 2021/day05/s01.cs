@@ -11,10 +11,41 @@ namespace AdventOfCode.Y2021.Day05
         public void Solve()
         {
             int result = 0;
+            ReadInput();
+            //PrintCoordList();
+            BuildGrid();
+
+            foreach(var coordPair in CoordsList)
+            {
+                //Console.WriteLine(coordPair.Horizontal + " " + coordPair.XStarting +  " " + coordPair.XEnding + " | " + coordPair.Vertical + " " + coordPair.YStarting + " " + coordPair.YEnding);
+                if(coordPair.Horizontal)
+                {
+                    var start = Math.Min(coordPair.XStarting,coordPair.XEnding);
+                    var end = Math.Max(coordPair.XStarting,coordPair.XEnding);
+                    //Console.WriteLine(start + " " + end);
+                    for(var vent = start; vent <= end; vent++)
+                    {
+                        Grid[coordPair.YStarting][vent] += 1;
+                    }
+                    //PrintGrid();
+                }
+                if(coordPair.Vertical)
+                {
+                    var start = Math.Min(coordPair.YStarting,coordPair.YEnding);
+                    var end = Math.Max(coordPair.YStarting,coordPair.YEnding);
+                    //Console.WriteLine(start + " " + end);
+                    for(var vent = start; vent <= end; vent++)
+                    {
+                        Grid[vent][coordPair.XStarting] += 1;
+                    }
+                    //PrintGrid();
+                }
+            }
+            result = CountDangerSpots();
 
             Console.WriteLine($"{result} is the result");
         }
-        public List<string> ReadInput()
+        public void ReadInput()
         {
             var puzzleInput = new List<string>();
 
@@ -28,36 +59,63 @@ namespace AdventOfCode.Y2021.Day05
                     var x1 = Int32.Parse(line.Split(',')[0]);
                     var y2 = Int32.Parse(line.Split(',')[2]);
                     var insideInput = line.Split(',')[1];
-                    var x2 = Int32.Parse(insideInput.Split(new char[0])[0]);
-                    var y1 = Int32.Parse(insideInput.Split(new char[0])[2]);
+                    var y1 = Int32.Parse(insideInput.Split(new char[0])[0]);
+                    var x2 = Int32.Parse(insideInput.Split(new char[0])[2]);
                     CoordsList.Add(new Coords(x1,y1,x2,y2));
                     line = reader.ReadLine();
                 }
             }
+        }
+        public void BuildGrid()
+        {
+            var width = Math.Max(CoordsList.Max(x => x.XStarting),CoordsList.Max(x=> x.XEnding))+1;
+            var height = Math.Max(CoordsList.Max(y => y.YStarting),CoordsList.Max(y=> y.YEnding))+1;
+
+            for(int y = 0; y< height; y++)
+            {
+                Grid.Add(new List<int>(new int[width]));
+            }
+            
+        }
+        public void PrintCoordList()
+        {
             foreach(var pair in CoordsList)
             {
-                Console.WriteLine(pair.XStarting+" "+pair.XEnding+" "+pair.YStarting+" "+pair.YEnding);
+                pair.PrintCoords();
             }
-
-            return puzzleInput;
+            
         }
-
-        public string InputFile = "2021/day05/example.txt";
-        public List<Coords> CoordsList = new List<Coords>();
-
-    }
-    class Coords
-    {
-        public Coords(int xStart, int yStart, int xEnd, int yEnd)
+        public void PrintGrid()
         {
-            XStarting = xStart;
-            XEnding = xEnd;
-            YStarting = yStart;
-            YEnding = yEnd;
+            foreach(var row in Grid)
+            {
+                foreach(var col in row)
+                {
+                    Console.Write(col + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
         }
-        public int XStarting = -1;
-        public int XEnding = -1;
-        public int YStarting = -1;
-        public int YEnding = -1;
+        public int CountDangerSpots()
+        {
+            var dangerSpots = 0;
+            foreach(var row in Grid)
+            {
+                foreach(var col in row)
+                {
+                    if(col > 1)
+                    {
+                        dangerSpots ++;
+                    }
+                }
+            }
+            return dangerSpots;
+        }
+
+        public string InputFile = "2021/day05/input.txt";
+        public List<Coords> CoordsList = new List<Coords>();
+        public List<List<int>> Grid = new List<List<int>>();
+
     }
 }
