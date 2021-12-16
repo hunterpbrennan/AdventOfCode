@@ -116,10 +116,10 @@ namespace AdventOfCode
             Console.WriteLine("Solving day 06");
             
             var star1Puzzle = new Day06.S01();
-            //var star2Puzzle = new Day06.S02();
+            var star2Puzzle = new Day06.S02();
 
             star1Puzzle.Solve();
-            //star2Puzzle.Solve();
+            star2Puzzle.Solve();
 
             Console.WriteLine("Day solved");
         }

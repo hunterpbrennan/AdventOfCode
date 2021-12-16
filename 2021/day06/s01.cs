@@ -11,6 +11,23 @@ namespace AdventOfCode.Y2021.Day06
         {
             int result = 0;
             ReadInput();
+            //PrintAges();
+            for(var day = 0; day< 80; day++)
+            {
+                var adultLanternFish = LanternFish.Count();
+                for(var fish = 0; fish<adultLanternFish;fish++)
+                {
+                    LanternFish[fish] = LanternFish[fish]-1;
+                    if(LanternFish[fish]<0)
+                    {
+                        LanternFish[fish] = 6;
+                        LanternFish.Add(8);
+                    }
+                }
+                //PrintAges();
+            }
+
+            result = LanternFish.Count();
 
             Console.WriteLine($"{result} is the result");
         }
@@ -35,7 +52,7 @@ namespace AdventOfCode.Y2021.Day06
             Console.WriteLine();
         }
 
-        public string InputFile = "2021/day06/example.txt";
+        public string InputFile = "2021/day06/input.txt";
         public List<int> LanternFish = new List<int>();
     }
 }
