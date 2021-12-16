@@ -69,7 +69,10 @@ namespace AdventOfCode.Y2021.Day04
             using(var reader = File.OpenText(path))
             {
                 var line = reader.ReadLine();
-                NumberOrder = line.Split(',').ToList();
+                if(line is not null)
+                {
+                    NumberOrder = line.Split(',').ToList();
+                }
                 line = reader.ReadLine();
                 var bingoBoardLine = new List<string>();
                 while(line != null)
@@ -77,7 +80,11 @@ namespace AdventOfCode.Y2021.Day04
                     
                     for( int i =0; i<5; i++)
                     {
-                        bingoBoardLine = System.Text.RegularExpressions.Regex.Split( reader.ReadLine().Trim() ,@"\s+").ToList();
+                        var bingoLine = reader.ReadLine();
+                        if(bingoLine is not null)
+                        {
+                            bingoBoardLine = System.Text.RegularExpressions.Regex.Split(bingoLine.Trim() ,@"\s+").ToList();
+                        }
                         foreach(var number in bingoBoardLine)
                         {
                             BingoBoardRow.Add((number, 0));

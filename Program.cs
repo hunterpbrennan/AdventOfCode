@@ -15,11 +15,11 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            // SolveDay01();
-            // SolveDay02();
-            // SolveDay03();
-            // SolveDay04();
-            // SolveDay05();
+            //SolveDay01();
+            //SolveDay02();
+            //SolveDay03();
+            //SolveDay04();
+            //SolveDay05();
             SolveDay06();
         }
 
