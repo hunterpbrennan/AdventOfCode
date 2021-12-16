@@ -3,9 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AdventOfCode.Y2021.Day05
+namespace AdventOfCode.Y2021.Day06
 {
-    class S02
+    class S01
     {
         public void Solve()
         {
@@ -31,40 +31,6 @@ namespace AdventOfCode.Y2021.Day05
                     for(var vent = start; vent <= end; vent++)
                     {
                         Grid[vent][coordPair.XStarting] += 1;
-                    }
-                }
-                if(coordPair.Diagonal)
-                {
-                    var xDirection = coordPair.XStarting-coordPair.XEnding;
-                    var yDirection = coordPair.YStarting-coordPair.YEnding;
-                    var j = coordPair.YStarting;
-                    if(xDirection<0 && yDirection<0)
-                    {
-                        for(var i = coordPair.XStarting; i<=coordPair.XEnding; i++,j++)
-                        {
-                            Grid[j][i] += 1;
-                        }
-                    }
-                    if(xDirection<0 && yDirection>0)
-                    {
-                        for(var i = coordPair.XStarting; i<=coordPair.XEnding; i++,j--)
-                        {
-                            Grid[j][i] += 1;
-                        }
-                    }
-                    if(xDirection>0 && yDirection<0)
-                    {
-                        for(var i = coordPair.XStarting; i>=coordPair.XEnding; i--,j++)
-                        {
-                            Grid[j][i] += 1;
-                        }
-                    }
-                    if(xDirection>0 && yDirection>0)
-                    {
-                        for(var i = coordPair.XStarting; i>=coordPair.XEnding; i--,j--)
-                        {
-                            Grid[j][i] += 1;
-                        }
                     }
                 }
             }

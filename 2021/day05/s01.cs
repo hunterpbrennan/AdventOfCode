@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Linq;
 
 namespace AdventOfCode.Y2021.Day05
@@ -12,33 +11,27 @@ namespace AdventOfCode.Y2021.Day05
         {
             int result = 0;
             ReadInput();
-            //PrintCoordList();
             BuildGrid();
 
             foreach(var coordPair in CoordsList)
             {
-                //Console.WriteLine(coordPair.Horizontal + " " + coordPair.XStarting +  " " + coordPair.XEnding + " | " + coordPair.Vertical + " " + coordPair.YStarting + " " + coordPair.YEnding);
                 if(coordPair.Horizontal)
                 {
                     var start = Math.Min(coordPair.XStarting,coordPair.XEnding);
                     var end = Math.Max(coordPair.XStarting,coordPair.XEnding);
-                    //Console.WriteLine(start + " " + end);
                     for(var vent = start; vent <= end; vent++)
                     {
                         Grid[coordPair.YStarting][vent] += 1;
                     }
-                    //PrintGrid();
                 }
                 if(coordPair.Vertical)
                 {
                     var start = Math.Min(coordPair.YStarting,coordPair.YEnding);
                     var end = Math.Max(coordPair.YStarting,coordPair.YEnding);
-                    //Console.WriteLine(start + " " + end);
                     for(var vent = start; vent <= end; vent++)
                     {
                         Grid[vent][coordPair.XStarting] += 1;
                     }
-                    //PrintGrid();
                 }
             }
             result = CountDangerSpots();
