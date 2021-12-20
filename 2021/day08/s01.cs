@@ -9,18 +9,20 @@ namespace AdventOfCode.Y2021.Day08
     {
         public void Solve()
         {
-            int result = int.MaxValue;
+            int result = 0;
+            List<int> simpleDigits = new List<int>{2,3,4,7};
             ReadInput();
-            for(var middleDistance = NearestCrab; middleDistance<FarthestCrab; middleDistance++)
+            
+            PrintSignals();
+
+            foreach(var Signal in Signals)
             {
-                var fuelSpent = 0;
-                foreach(var crab in CrabLocations)
+                foreach(var digit in Signal.OutputValue)
                 {
-                    fuelSpent += Math.Abs(middleDistance - crab);
-                }
-                if(fuelSpent<result)
-                {
-                    result = fuelSpent;
+                    if(simpleDigits.Contains(digit.Length))
+                    {
+                        result++;
+                    }
                 }
             }
 
@@ -32,26 +34,22 @@ namespace AdventOfCode.Y2021.Day08
             using(var reader = File.OpenText(path))
             {
                 var line = reader.ReadLine();
-                if(line is not null)
+                while(line is not null)
                 {
-                    CrabLocations = line.Split(',').Select(Int32.Parse).ToList();
+                    Signals.Add(new Signal(line.Split('|')[0].Trim().Split(' ').ToList(),line.Split('|')[1].Trim().Split(' ').ToList()));
+                    line = reader.ReadLine();
                 }
             }
-            NearestCrab = CrabLocations.Min();
-            FarthestCrab = CrabLocations.Max();
         }
-        public void PrintLocations()
+        public void PrintSignals()
         {
-            foreach(var fish in CrabLocations)
+            foreach(var signal in Signals)
             {
-                Console.Write(fish + " ");
+                signal.PrintSignal();
             }
-            Console.WriteLine();
         }
 
-        public string InputFile = "2021/day08/example.txt";
-        public List<int> CrabLocations = new List<int>();
-        public int NearestCrab = int.MaxValue;
-        public int FarthestCrab = int.MinValue;
+        public string InputFile = "2021/day08/input.txt";
+        public List<Signal> Signals = new List<Signal>();
     }
 }
