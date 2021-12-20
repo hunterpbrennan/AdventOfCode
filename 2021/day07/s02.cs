@@ -9,24 +9,20 @@ namespace AdventOfCode.Y2021.Day07
     {
         public void Solve()
         {
-            long result = 0;
+            int result = int.MaxValue;
             ReadInput();
-            //PrintCycleCount();
-
-            for(var day = 0; day< 256; day++)
+            for(var middleDistance = NearestCrab; middleDistance<FarthestCrab; middleDistance++)
             {
-                var oldFish = LanternFishAgeGroups[0];
-                for(var age = 1; age<9;age++)
+                var fuelSpent = 0;
+                foreach(var crab in CrabLocations)
                 {
-                    LanternFishAgeGroups[age-1] = LanternFishAgeGroups[age];
+                    fuelSpent += CalculateFuelConsumption(Math.Abs(middleDistance - crab));
                 }
-                LanternFishAgeGroups[8] = oldFish;
-                LanternFishAgeGroups[6] += oldFish;
-                //PrintCycleCount();
-
+                if(fuelSpent<result)
+                {
+                    result = fuelSpent;
+                }
             }
-
-            result = LanternFishAgeGroups.Sum();
 
             Console.WriteLine($"{result} is the result");
         }
@@ -38,23 +34,33 @@ namespace AdventOfCode.Y2021.Day07
                 var line = reader.ReadLine();
                 if(line is not null)
                 {
-                    foreach(var fish in line.Split(',').Select(Int32.Parse).ToList())
-                    {
-                        LanternFishAgeGroups[fish]++;
-                    }
+                    CrabLocations = line.Split(',').Select(Int32.Parse).ToList();
                 }
             }
+            NearestCrab = CrabLocations.Min();
+            FarthestCrab = CrabLocations.Max();
         }
-        public void PrintCycleCount()
+        public void PrintLocations()
         {
-            foreach(var age in LanternFishAgeGroups)
+            foreach(var fish in CrabLocations)
             {
-                Console.Write(age + " ");
+                Console.Write(fish + " ");
             }
             Console.WriteLine();
         }
+        public int CalculateFuelConsumption(int distance)
+        {
+            int fuelConsumed = 0;
+            for(var fuelConsumptionRate = 0; fuelConsumptionRate<=distance; fuelConsumptionRate++)
+            {
+                fuelConsumed += fuelConsumptionRate;
+            }
+            return fuelConsumed;
+        }
 
-        public string InputFile = "2021/day07/example.txt";
-        public long[] LanternFishAgeGroups = new long[9];
+        public string InputFile = "2021/day07/input.txt";
+        public List<int> CrabLocations = new List<int>();
+        public int NearestCrab = int.MaxValue;
+        public int FarthestCrab = int.MinValue;
     }
 }
