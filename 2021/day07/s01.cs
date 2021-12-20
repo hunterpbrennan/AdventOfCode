@@ -9,25 +9,20 @@ namespace AdventOfCode.Y2021.Day07
     {
         public void Solve()
         {
-            int result = 0;
+            int result = int.MaxValue;
             ReadInput();
-            //PrintAges();
-            for(var day = 0; day< 80; day++)
+            for(var middleDistance = NearestCrab; middleDistance<FarthestCrab; middleDistance++)
             {
-                var adultLanternFish = LanternFish.Count();
-                for(var fish = 0; fish<adultLanternFish;fish++)
+                var fuelSpent = 0;
+                foreach(var crab in CrabLocations)
                 {
-                    LanternFish[fish] = LanternFish[fish]-1;
-                    if(LanternFish[fish]<0)
-                    {
-                        LanternFish[fish] = 6;
-                        LanternFish.Add(8);
-                    }
+                    fuelSpent += Math.Abs(middleDistance - crab);
                 }
-                //PrintAges();
+                if(fuelSpent<result)
+                {
+                    result = fuelSpent;
+                }
             }
-
-            result = LanternFish.Count();
 
             Console.WriteLine($"{result} is the result");
         }
@@ -39,20 +34,24 @@ namespace AdventOfCode.Y2021.Day07
                 var line = reader.ReadLine();
                 if(line is not null)
                 {
-                    LanternFish = line.Split(',').Select(Int32.Parse).ToList();
+                    CrabLocations = line.Split(',').Select(Int32.Parse).ToList();
                 }
             }
+            NearestCrab = CrabLocations.Min();
+            FarthestCrab = CrabLocations.Max();
         }
-        public void PrintAges()
+        public void PrintLocations()
         {
-            foreach(var fish in LanternFish)
+            foreach(var fish in CrabLocations)
             {
                 Console.Write(fish + " ");
             }
             Console.WriteLine();
         }
 
-        public string InputFile = "2021/day07/example.txt";
-        public List<int> LanternFish = new List<int>();
+        public string InputFile = "2021/day07/input.txt";
+        public List<int> CrabLocations = new List<int>();
+        public int NearestCrab = int.MaxValue;
+        public int FarthestCrab = int.MinValue;
     }
 }
