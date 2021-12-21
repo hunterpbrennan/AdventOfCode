@@ -11,10 +11,33 @@ namespace AdventOfCode.Y2021.Day09
         {
             int result = 0;
             ReadInput();
-
-            foreach(var signal in Signals)
+            foreach(var row in HeightMap)
             {
-                result+= signal.ReadoutCount;
+                foreach(var height in row)
+                {
+                    Console.Write(height+ " ");
+                }
+                Console.WriteLine();
+            }
+
+            for(int columnIndex = 0; columnIndex <HeightMap.Count();columnIndex++)
+            {
+                for(int rowIndex = 0; rowIndex <HeightMap[columnIndex].Count();rowIndex++)
+                {
+                    if(columnIndex<=0 || HeightMap[columnIndex-1][rowIndex]>HeightMap[columnIndex][rowIndex])
+                    {
+                        if(columnIndex>=HeightMap.Count()-1 || HeightMap[columnIndex+1][rowIndex]>HeightMap[columnIndex][rowIndex])
+                        {
+                            if(rowIndex<=0 || HeightMap[columnIndex][rowIndex-1]>HeightMap[columnIndex][rowIndex])
+                            {
+                                if(rowIndex>=HeightMap[columnIndex].Count()-1 || HeightMap[columnIndex][rowIndex+1]>HeightMap[columnIndex][rowIndex])
+                                {
+                                    result+= HeightMap[columnIndex][rowIndex]+1;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             Console.WriteLine($"{result} is the result");
@@ -27,20 +50,19 @@ namespace AdventOfCode.Y2021.Day09
                 var line = reader.ReadLine();
                 while(line is not null)
                 {
-                    Signals.Add(new Signal(line.Split('|')[0].Trim().Split(' ').ToList(),line.Split('|')[1].Trim().Split(' ').ToList()));
+                    List<int> temp = new List<int>();
+                    foreach(var value in line.ToList())
+                    {
+                        temp.Add(value-'0');
+                    }
+                    HeightMap.Add(new List<int>(temp));
+                    temp.Clear();
                     line = reader.ReadLine();
                 }
             }
         }
-        public void PrintSignals()
-        {
-            foreach(var signal in Signals)
-            {
-                signal.PrintSignal();
-            }
-        }
 
-        public string InputFile = "2021/day9/example.txt";
-        public List<Signal> Signals = new List<Signal>();
+        public string InputFile = "2021/day09/example.txt";
+        public List<List<int>> HeightMap = new List<List<int>>();
     }
 }

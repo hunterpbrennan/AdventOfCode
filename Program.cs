@@ -164,8 +164,8 @@ namespace AdventOfCode
             var star1Puzzle = new Day09.S01();
             var star2Puzzle = new Day09.S02();
 
-            star1Puzzle.Solve();
-            //star2Puzzle.Solve();
+            //star1Puzzle.Solve();
+            star2Puzzle.Solve();
 
             Console.WriteLine("Day solved");
         }
