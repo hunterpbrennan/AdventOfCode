@@ -17,7 +17,7 @@ namespace AdventOfCode.Y2021.Day08
 
             foreach(var Signal in Signals)
             {
-                foreach(var digit in Signal.OutputValue)
+                foreach(var digit in Signal.Readout)
                 {
                     if(simpleDigits.Contains(digit.Length))
                     {
