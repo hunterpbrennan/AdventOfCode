@@ -1,3 +1,5 @@
+import os
+os.chdir('AdventOfCode\\2022\\d01')
 
 with open('d01input.txt') as f:
     lines = f.readlines()
