@@ -28,7 +28,9 @@ for instruction in instructions:
     amount, source, destination = [int(s) for s in instruction.split() if s.isdigit()]
 
     for moves in range(amount):
-        shippingMatrix[destination-1].append(shippingMatrix[source-1].pop())
+        cratesMoved.append(shippingMatrix[source-1].pop())
+    for moves in range(amount):
+        shippingMatrix[destination-1].append(cratesMoved.pop())
 
 result = ""
 
