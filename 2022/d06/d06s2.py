@@ -9,9 +9,9 @@ endOfSequenceIndex = 0
 dupeCheck = []
 
 for index, letter in enumerate(characters):
-    if len(dupeCheck) == 4:
+    if len(dupeCheck) == 14:
         dupeCheck.pop(0)
     dupeCheck.append(letter)
-    if len(set(dupeCheck)) == 4:
+    if len(set(dupeCheck)) == 14:
         print(index+1)
         break
