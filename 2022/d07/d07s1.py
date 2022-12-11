@@ -8,45 +8,39 @@ instructions = []
 for line in lines:
     instructions.append(line.strip('\n'))
 
-fileDirectory = {}
+fileSizeDirectory = {}
 
 result = 0
 
 currentFolder = []
-myiter = iter(instructions)
+currentPath = ""
 
-for line in myiter:
+for line in instructions:
     if "$" in line:
         if line == "$ cd /":
-            #print("go to root")
-            currentFolder.clear()
+            continue
         elif "$ cd .." in line:
-            #print("move out a level")
             currentFolder.pop()
+            if len(currentFolder) ==0:
+                currentPath = ''
+            else:
+                currentPath = currentFolder[-1]
         elif "$ cd" in line:
-            #print("move in a level")
-            currentFolder.append(line[5:])
-            if line[5:] not in fileDirectory:
-                fileDirectory[line[5:]] = 0
-            #print(currentFolder)
+            currentPath += line[5:]
+            currentFolder.append(currentPath)
         elif "$ ls" in line:
-            while '$' not in line:
-                #print("should list")
-                next(myiter,None)
+            continue
     elif "dir" in line:
-        if line[4:] not in fileDirectory:
-                fileDirectory[line[4:]] = 0
+        if currentPath+line[4:] not in fileSizeDirectory:
+            fileSizeDirectory[currentPath+line[4:]] = 0
     else:
+        print(currentFolder)
         for folder in currentFolder:
-            print(folder+":"+line.split(" ")[0])
-            fileDirectory[folder] += int(line.split(" ")[0])
+            fileSizeDirectory[folder] += int(line.split(" ")[0])
 
-for key, value in fileDirectory.items():
-    #print("directory:"+ key+ " size:"+str(value))
+for key, value in fileSizeDirectory.items():
     if value<= 100000:
         result+= value
-        
-print(fileDirectory)
 
 
 print(result)
